@@ -1,6 +1,8 @@
 import { IUserRepository } from './IUserRepository';
 import { User } from './types/User';
+import { singleton } from 'tsyringe';
 
+@singleton()
 export class UserRepository implements IUserRepository {
   getUsers(): User[] {
     return [
