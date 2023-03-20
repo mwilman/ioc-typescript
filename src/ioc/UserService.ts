@@ -5,18 +5,14 @@ import { inject, injectable, singleton } from 'tsyringe';
 
 @injectable()
 export class UserService implements IUserService {
-  private _userRepository: IUserRepository;
-
-  constructor(@inject("_userRepository") protected userRepository: IUserRepository) {
-    this._userRepository = userRepository;
-  }
+  constructor(
+    @inject('_userRepository') protected userRepository: IUserRepository,
+  ) {}
   getAllUsers(): User[] {
-    return this._userRepository.getUsers();
+    return this.userRepository.getUsers();
   }
 
   getMatureUsers(): User[] {
-    return this._userRepository
-      .getUsers()
-      .filter((user: User) => user.age > 17);
+    return this.userRepository.getUsers().filter((user: User) => user.age > 17);
   }
 }
