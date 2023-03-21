@@ -1,19 +1,18 @@
 import { IUserService } from './IUserService';
 import { User } from './types/User';
 import { IUserRepository } from './IUserRepository';
+import { inject, injectable } from 'inversify';
+import { TYPES } from './types/TYPES';
 
+@injectable()
 export class UserService implements IUserService {
-  private _userRepository: IUserRepository;
-
-  constructor(private userRepository: IUserRepository) {
-    this._userRepository = userRepository;
-  }
+  constructor(@inject(TYPES.UserRepository) protected userRepository: IUserRepository) {}
   getAllUsers(): User[] {
-    return this._userRepository.getUsers();
+    return this.userRepository.getUsers();
   }
 
   getMatureUsers(): User[] {
-    return this._userRepository
+    return this.userRepository
       .getUsers()
       .filter((user: User) => user.age > 17);
   }

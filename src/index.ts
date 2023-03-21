@@ -1,15 +1,23 @@
-// eslint-disable-next-line no-console
+import 'reflect-metadata';
+
 import { UserController } from './ioc/UserController';
 import { UserService } from './ioc/UserService';
 import { UserRepository } from './ioc/userRepository';
 import { IUserRepository } from './ioc/IUserRepository';
 import { IUserService } from './ioc/IUserService';
+import { Container } from 'inversify';
+import { TYPES } from './ioc/types/TYPES';
 
 console.log('Hello world!');
 
-const userRepository: IUserRepository = new UserRepository();
-const userService: IUserService = new UserService(userRepository);
-const userController: UserController = new UserController(userService);
+const container = new Container();
+container.bind<UserRepository>(TYPES.UserRepository).to(UserRepository).inSingletonScope();
+container.bind<UserService>(TYPES.UserService).to(UserService).inSingletonScope();
+container.bind<UserController>(TYPES.UserController).to(UserController).inSingletonScope();
+
+const userRepository = container.get<UserRepository>(TYPES.UserRepository);
+const userService = container.get<UserService>(TYPES.UserService);
+const userController = container.get<UserController>(TYPES.UserController);
 
 console.log('Declaration done');
 

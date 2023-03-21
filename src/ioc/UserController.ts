@@ -1,17 +1,16 @@
 import { User } from './types/User';
 import { IUserService } from './IUserService';
+import { inject, injectable } from 'inversify';
+import { TYPES } from './types/TYPES';
 
+@injectable()
 export class UserController {
-  private _userService: IUserService;
-
-  constructor(private userService: IUserService) {
-    this._userService = userService;
-  }
+  constructor(@inject(TYPES.UserService) protected userService: IUserService) {}
   getAllUser(): User[] {
-    return this._userService.getAllUsers();
+    return this.userService.getAllUsers();
   }
 
   getAllMatureUser(): User[] {
-    return this._userService.getAllUsers();
+    return this.userService.getAllUsers();
   }
 }

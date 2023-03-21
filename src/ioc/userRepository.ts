@@ -1,6 +1,8 @@
 import { IUserRepository } from './IUserRepository';
 import { User } from './types/User';
+import { injectable } from 'inversify';
 
+@injectable()
 export class UserRepository implements IUserRepository {
   getUsers(): User[] {
     return [
