@@ -5,7 +5,7 @@ import { TYPES } from './types/TYPES';
 
 @injectable()
 export class UserController {
-  constructor(@inject(TYPES.UserService) protected userService: IUserService) {}
+  constructor(@inject(TYPES.IUserService) protected userService: IUserService) {}
   getAllUser(): User[] {
     return this.userService.getAllUsers();
   }

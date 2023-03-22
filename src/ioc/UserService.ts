@@ -6,7 +6,7 @@ import { TYPES } from './types/TYPES';
 
 @injectable()
 export class UserService implements IUserService {
-  constructor(@inject(TYPES.UserRepository) protected userRepository: IUserRepository) {}
+  constructor(@inject(TYPES.IUserRepository) protected userRepository: IUserRepository) {}
   getAllUsers(): User[] {
     return this.userRepository.getUsers();
   }

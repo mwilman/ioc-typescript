@@ -3,20 +3,18 @@ import 'reflect-metadata';
 import { UserController } from './ioc/UserController';
 import { UserService } from './ioc/UserService';
 import { UserRepository } from './ioc/userRepository';
-import { IUserRepository } from './ioc/IUserRepository';
-import { IUserService } from './ioc/IUserService';
 import { Container } from 'inversify';
 import { TYPES } from './ioc/types/TYPES';
 
 console.log('Hello world!');
 
 const container = new Container();
-container.bind<UserRepository>(TYPES.UserRepository).to(UserRepository).inSingletonScope();
-container.bind<UserService>(TYPES.UserService).to(UserService).inSingletonScope();
+container.bind<UserRepository>(TYPES.IUserRepository).to(UserRepository).inSingletonScope();
+container.bind<UserService>(TYPES.IUserService).to(UserService).inSingletonScope();
 container.bind<UserController>(TYPES.UserController).to(UserController).inSingletonScope();
 
-const userRepository = container.get<UserRepository>(TYPES.UserRepository);
-const userService = container.get<UserService>(TYPES.UserService);
+const userRepository = container.get<UserRepository>(TYPES.IUserRepository);
+const userService = container.get<UserService>(TYPES.IUserService);
 const userController = container.get<UserController>(TYPES.UserController);
 
 console.log('Declaration done');

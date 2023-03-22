@@ -1,5 +1,5 @@
 export const TYPES = {
   UserController: Symbol.for('UserController'),
-  UserRepository: Symbol.for('UserRepository'),
-  UserService: Symbol.for('UserService'),
+  IUserRepository: Symbol.for('UserRepository'),
+  IUserService: Symbol.for('UserService'),
 };
